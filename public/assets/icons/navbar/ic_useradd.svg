@@ -1,0 +1,11 @@
+<!-- WARNING This work includes material that may be protected as a trademark in some jurisdictions. If you want to use it, you have to ensure that you have the legal right to do so and that you do not infringe any trademark rights. The use of these trademarks does not indicate endorsement of the trademark holder by Snoweb SVG, nor vice versa. See the trademark owner for rules about appropriate use of their trademarks. https://github.com/tailwindlabs/heroicons/blob/master/LICENSE -->
+<svg class="svg-snoweb svg-theme-light" height="100" preserveaspectratio="xMidYMid meet" viewbox="0 0 100 100" width="100" x="0" xmlns="http://www.w3.org/2000/svg" y="0">
+ <rect class="svg-fill-primary" height="27.45" rx="9.1" width="27.4" x="18" y="18">
+ </rect>
+ <rect class="svg-fill-primary" height="27.45" rx="9.1" width="27.4" x="18" y="54.6">
+ </rect>
+ <rect class="svg-fill-primary" height="27.45" rx="9.1" width="27.4" x="54.6" y="18">
+ </rect>
+ <path class="svg-fill-primary" d="M77.4,63.7H72.9V59.1a4.6,4.6,0,0,0-9.2,0v4.6H59.1a4.6,4.6,0,0,0,0,9.2h4.6v4.5a4.6,4.6,0,0,0,9.2,0V72.9h4.5a4.6,4.6,0,1,0,0-9.2Z">
+ </path>
+</svg>

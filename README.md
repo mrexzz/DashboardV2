@@ -5,7 +5,7 @@
 - **Start:** `yarn dev`
 - **Build:** `yarn build`
 
-Link: https://dash-board-4kyv.vercel.app/
+Link: https://dashboard-v2-green-two.vercel.app/
 
 Eklenebilecekler : 
 

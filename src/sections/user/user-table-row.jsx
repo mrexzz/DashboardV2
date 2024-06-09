@@ -19,12 +19,15 @@ import Iconify from 'src/components/iconify';
 export default function UserTableRow({
   selected,
   name,
+  current_score,
   avatarUrl,
   company,
   role,
-  isVerified,
+  email,
+  team,
   status,
   handleClick,
+  lessons_taken
 }) {
   const [open, setOpen] = useState(null);
 
@@ -52,16 +55,18 @@ export default function UserTableRow({
           </Stack>
         </TableCell>
 
-        <TableCell>{company}</TableCell>
+        <TableCell>{team}</TableCell>
 
         <TableCell>{role}</TableCell>
 
-        <TableCell align="center">{isVerified ? 'Yes' : 'No'}</TableCell>
+        <TableCell align="center">{email}</TableCell>
 
         <TableCell>
-          <Label color={(status === 'banned' && 'error') || 'success'}>{status}</Label>
+          {current_score}
         </TableCell>
-
+        <TableCell>
+        {lessons_taken}
+        </TableCell>
         <TableCell align="right">
           <IconButton onClick={handleOpenMenu}>
             <Iconify icon="eva:more-vertical-fill" />
@@ -97,9 +102,12 @@ UserTableRow.propTypes = {
   avatarUrl: PropTypes.any,
   company: PropTypes.any,
   handleClick: PropTypes.func,
-  isVerified: PropTypes.any,
+  email: PropTypes.any,
+  team: PropTypes.any,
   name: PropTypes.any,
   role: PropTypes.any,
+  current_score: PropTypes.any,
   selected: PropTypes.any,
+  lessons_taken: PropTypes.any,
   status: PropTypes.string,
 };

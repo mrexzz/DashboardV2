@@ -15,7 +15,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Iconify from 'src/components/iconify';
 import Logo from 'src/components/logo';
 import { bgGradient } from 'src/theme/css';
-import useToken from './Token';
 
 export default function LoginView() {
   const navigateTo = useNavigate();

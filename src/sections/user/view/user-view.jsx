@@ -9,7 +9,8 @@ import TableBody from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
-
+import Modal from '@mui/material/Modal'; 
+import { TextField, Grid } from '@mui/material'; 
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 
@@ -24,7 +25,7 @@ import { emptyRows, applyFilter, getComparator } from '../utils';
 
 export default function UserPage() {
   const [employeeNames, setEmployeeNames] = useState([]);
-
+  const [isNewUserModalOpen, setNewUserModalOpen] = useState(false); 
   useEffect(() => {
     fetch('https://demotrainiq.com/case/dashboard')
       .then((response) => {
@@ -65,7 +66,13 @@ export default function UserPage() {
       setOrderBy(id);
     }
   };
+  const handleOpenNewUserModal = () => {
+    setNewUserModalOpen(true);
+  };
 
+  const handleCloseNewUserModal = () => {
+    setNewUserModalOpen(false);
+  };
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelecteds = employeeNames.map((n) => n.name);
@@ -119,10 +126,32 @@ export default function UserPage() {
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4">Users</Typography>
-
-        <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
-          New User
-        </Button>
+        <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenNewUserModal}>New User</Button>
+        <Modal
+        open={isNewUserModalOpen}
+        onClose={handleCloseNewUserModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Card sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'background.paper', boxShadow: 24, p: 4 }}>
+          <Typography variant="h6" component="h2" align="center" mb={2}>New User</Typography>
+          {/* Yeni kullanıcı ekleme formu */}
+          <Grid container spacing={2} alignItems="center" justifyContent="center">
+            <Grid item xs={12}>
+              <TextField label="Name" fullWidth variant="outlined" />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField label="Role" fullWidth variant="outlined" />
+            </Grid>
+            <Grid item xs={12}>
+  <TextField label="Email" fullWidth variant="outlined" required />
+            </Grid>
+            <Grid item xs={12} textAlign="center">
+              <Button variant="contained" color="primary">Add User</Button>
+            </Grid>
+          </Grid>
+        </Card>
+      </Modal>
       </Stack>
 
       <Card>

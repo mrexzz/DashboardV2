@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
@@ -10,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import Modal from '@mui/material/Modal'; 
-import { TextField, Grid } from '@mui/material'; 
+import { TextField, Grid, Alert } from '@mui/material'; 
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 
@@ -26,6 +25,12 @@ import { emptyRows, applyFilter, getComparator } from '../utils';
 export default function UserPage() {
   const [employeeNames, setEmployeeNames] = useState([]);
   const [isNewUserModalOpen, setNewUserModalOpen] = useState(false); 
+
+  const [newUserName, setNewUserName] = useState('');
+  const [newUserRole, setNewUserRole] = useState('');
+  const [newUserEmail, setNewUserEmail] = useState('');
+  const [formError, setFormError] = useState('');
+
   useEffect(() => {
     fetch('https://demotrainiq.com/case/dashboard')
       .then((response) => {
@@ -66,13 +71,16 @@ export default function UserPage() {
       setOrderBy(id);
     }
   };
+
   const handleOpenNewUserModal = () => {
     setNewUserModalOpen(true);
   };
 
   const handleCloseNewUserModal = () => {
     setNewUserModalOpen(false);
+    setFormError('');
   };
+
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelecteds = employeeNames.map((n) => n.name);
@@ -114,6 +122,14 @@ export default function UserPage() {
     setFilterName(event.target.value);
   };
 
+  const handleAddUser = () => {
+    if (!newUserName || !newUserRole || !newUserEmail) {
+      setFormError('All fields are required.');
+      return;
+    }
+    handleCloseNewUserModal();
+  };
+
   const dataFiltered = applyFilter({
     inputData: employeeNames,
     comparator: getComparator(order, orderBy),
@@ -138,16 +154,40 @@ export default function UserPage() {
           {/* Yeni kullanıcı ekleme formu */}
           <Grid container spacing={2} alignItems="center" justifyContent="center">
             <Grid item xs={12}>
-              <TextField label="Name" fullWidth variant="outlined" />
+              <TextField 
+                label="Name" 
+                fullWidth 
+                variant="outlined" 
+                value={newUserName}
+                onChange={(e) => setNewUserName(e.target.value)}
+              />
             </Grid>
             <Grid item xs={12}>
-              <TextField label="Role" fullWidth variant="outlined" />
+              <TextField 
+                label="Role" 
+                fullWidth 
+                variant="outlined" 
+                value={newUserRole}
+                onChange={(e) => setNewUserRole(e.target.value)}
+              />
             </Grid>
             <Grid item xs={12}>
-  <TextField label="Email" fullWidth variant="outlined" required />
+              <TextField 
+                label="Email" 
+                fullWidth 
+                variant="outlined" 
+                required 
+                value={newUserEmail}
+                onChange={(e) => setNewUserEmail(e.target.value)}
+              />
             </Grid>
+            {formError && (
+              <Grid item xs={12}>
+                <Alert severity="error">{formError}</Alert>
+              </Grid>
+            )}
             <Grid item xs={12} textAlign="center">
-              <Button variant="contained" color="primary">Add User</Button>
+              <Button variant="contained" color="primary" onClick={handleAddUser}>Add User</Button>
             </Grid>
           </Grid>
         </Card>
